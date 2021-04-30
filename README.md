@@ -1,3 +1,21 @@
+# Chinese OBFS
+
+This is a fork of BullshitGenerator.
+
+This tool could encode (hide) any data into nonsense chinese text, to avoid the extreme censorship of chinese forum. 
+
+This tool should be used to decode data from nonsense chinese text. 
+
+## Format proposal
+
+The first section encodes the topic. 
+
+The second section should use the bootstrap data.json and the topic above, to encode an url to actual data.json. 
+
+The third section is the actual data section. 
+
+----
+
 # 狗屁不通文章生成器
 # BullshitGenerator
 
