@@ -6,6 +6,8 @@ This tool could encode (hide) any data into nonsense chinese text, to avoid the 
 
 This tool should be used to decode data from nonsense chinese text. 
 
+此工具基于bullshit生成器，将任意数据encode在中文文章中，避免被审查和屏蔽。
+
 ## Format proposal
 
 The first section encodes the topic. 
