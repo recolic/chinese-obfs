@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import os, re
-import random
+from random import randint
 import gzip
 
 def loadJson(fileName):
@@ -22,17 +22,6 @@ print("debug: len=", [len(l) for l in [famous_data, prefix_data, postfix_data, n
 
 repeat_factor = 2
 
-def randomized_yield(iterable):
-    global repeat_factor
-    pool = list(iterable) * repeat_factor
-    while True:
-        random.shuffle(pool)
-        for ele in pool:
-            yield ele
-
-nonsense_generator = randomized_yield(nonsense_data)
-famous_generator = randomized_yield(famous_data)
-
 def new_famous():
     global famous_generator
     famous = next(famous_generator)
@@ -50,6 +39,10 @@ def paragraph_is_valid(text):
         return False
     return True
 
+def slice_bits(data, offset, count):
+
+    return 8
+
 topic = 'testing_topic'
 input_string = 'hello world'
 
@@ -63,17 +56,15 @@ def decode(text):
             continue
 
 
-
-if __name__ == "__main__":
-    topic = input("请输入文章主题:")
+def encode(text, topic, data)
     result = '    '
     curr_paragraph = ''
-    while ( len(result) < 6000 ) :
-        randsrc = random.randint(0,100)
-        if randsrc < 5 and paragraph_is_valid(curr_paragraph):
+    curr_data_offset = 0
+    while curr_data_offset < len(data)*8 :
+        if randint(0,100) < 5 and paragraph_is_valid(curr_paragraph):
             result += curr_paragraph + paragraph_tail()
             curr_paragraph = ''
-        elif randsrc < 20 :
+        elif randint(0,100) < 20 :
             curr_paragraph += new_famous()
         else:
             curr_paragraph += next(nonsense_generator)
