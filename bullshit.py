@@ -17,6 +17,8 @@ prefix_data   = list(data['before']) # 在famous_data前面弄点nonsense_data
 postfix_data  = list(data['after' ]) # 在famous_data后面弄点nonsense_data
 nonsense_data = list(data['bosh'  ]) # 代表文章主要nonsense_data来源
 
+print("debug: len=", [len(l) for l in [famous_data, prefix_data, postfix_data, nonsense_data]])
+
 repeat_factor = 2
 
 def randomized_yield(iterable):
@@ -38,10 +40,7 @@ def new_famous():
     return famous
 
 def new_paragraph():
-    xx = ". "
-    xx += "\r\n"
-    xx += "    "
-    return xx
+    return ". \r\n    "
 
 if __name__ == "__main__":
     topic = input("请输入文章主题:")
