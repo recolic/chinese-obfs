@@ -3,6 +3,7 @@
 
 import os, re
 import random
+import gzip
 
 def loadJson(fileName):
     import json
@@ -48,6 +49,20 @@ def paragraph_is_valid(text):
     if text[-1] == '，' or text[-1] == '：':
         return False
     return True
+
+topic = 'testing_topic'
+input_string = 'hello world'
+
+def data_serialize(data):
+    return gzip.compress(data, compresslevel=9)
+
+def decode(text):
+    for line in text.split('\r\n'):
+        paragraph = line.strip()
+        if paragraph == '':
+            continue
+
+
 
 if __name__ == "__main__":
     topic = input("请输入文章主题:")
