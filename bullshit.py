@@ -12,10 +12,10 @@ def loadJson(fileName):
             return json.loads(file.read())
 
 data = loadJson("data.json")
-famous_data   = list(data['famous']) # a 代表prefix_data，b代表postfix_data
-prefix_data   = list(data['before']) # 在famous_data前面弄点nonsense_data
-postfix_data  = list(data['after' ]) # 在famous_data后面弄点nonsense_data
-nonsense_data = list(data['bosh'  ]) # 代表文章主要nonsense_data来源
+famous_data   = list(data['famous'   ]) # a 代表prefix_data，b代表postfix_data
+prefix_data   = list(data['prefixes' ]) # 在famous_data前面弄点nonsense_data
+postfix_data  = list(data['postfixes']) # 在famous_data后面弄点nonsense_data
+nonsense_data = list(data['shits'    ]) # 代表文章主要nonsense_data来源
 
 print("debug: len=", [len(l) for l in [famous_data, prefix_data, postfix_data, nonsense_data]])
 
@@ -35,23 +35,32 @@ famous_generator = randomized_yield(famous_data)
 def new_famous():
     global famous_generator
     famous = next(famous_generator)
-    famous = famous.replace("a", random.choice(prefix_data) )
-    famous = famous.replace("b", random.choice(postfix_data) )
+    famous = famous.replace("$prefix", random.choice(prefix_data) )
+    famous = famous.replace("$postfix", random.choice(postfix_data) )
     return famous
 
-def new_paragraph():
-    return ". \r\n    "
+def paragraph_tail():
+    return "\r\n    "
+
+def paragraph_is_valid(text):
+    if len(text) < 16:
+        return False
+    if text[-1] == '，' or text[-1] == '：':
+        return False
+    return True
 
 if __name__ == "__main__":
     topic = input("请输入文章主题:")
-    result = str()
+    result = '    '
+    curr_paragraph = ''
     while ( len(result) < 6000 ) :
         randsrc = random.randint(0,100)
-        if randsrc < 5:
-            result += new_paragraph()
+        if randsrc < 5 and paragraph_is_valid(curr_paragraph):
+            result += curr_paragraph + paragraph_tail()
+            curr_paragraph = ''
         elif randsrc < 20 :
-            result += new_famous()
+            curr_paragraph += new_famous()
         else:
-            result += next(nonsense_generator)
-    result = result.replace("x",topic)
+            curr_paragraph += next(nonsense_generator)
+    result = result.replace("$topic",topic)
     print(result)
