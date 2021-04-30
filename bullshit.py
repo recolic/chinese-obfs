@@ -18,6 +18,11 @@ prefix_data   = list(data['prefixes' ]) # 在famous_data前面弄点nonsense_dat
 postfix_data  = list(data['postfixes']) # 在famous_data后面弄点nonsense_data
 nonsense_data = list(data['shits'    ]) # 代表文章主要nonsense_data来源
 
+famous_bits_count = 6
+prefix_bits_count = 2
+postfix_bits_count = 3
+nonsense_bits_count = 5
+
 print("debug: len=", [len(l) for l in [famous_data, prefix_data, postfix_data, nonsense_data]])
 
 repeat_factor = 2
@@ -55,8 +60,12 @@ def decode(text):
         if paragraph == '':
             continue
 
+        # 1. famous-prefix reorder. 
 
-def encode(text, topic, data)
+        # 2. element match and decode bits.
+
+
+def encode(text, topic, data):
     result = '    '
     curr_paragraph = ''
     curr_data_offset = 0
@@ -65,8 +74,16 @@ def encode(text, topic, data)
             result += curr_paragraph + paragraph_tail()
             curr_paragraph = ''
         elif randint(0,100) < 20 :
-            curr_paragraph += new_famous()
+            # add a famous
+            _index0 = slice_bits(data, curr_data_offset, prefix_bits_count)
+            curr_data_offset += prefix_bits_count
+            _index1 = slice_bits(data, curr_data_offset, famous_bits_count)
+            curr_data_offset += famous_bits_count
+            _index2 = slice_bits(data, curr_data_offset, postfix_bits_count)
+            curr_data_offset += postfix_bits_count
+
+            curr_paragraph += new_famous(famous_data[_index1], prefix_data[_index0], postfix_data[_index2])
         else:
-            curr_paragraph += next(nonsense_generator)
+            # TODO
     result = result.replace("$topic",topic)
     print(result)

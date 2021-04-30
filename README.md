@@ -16,6 +16,10 @@ The second section should use the bootstrap data.json and the topic above, to en
 
 The third section is the actual data section. 
 
+## dataset guide
+
+There should not be `，` or `。` in `famous` before `$prefix`. 
+
 ----
 
 # 狗屁不通文章生成器
